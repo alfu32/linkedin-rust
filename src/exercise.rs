@@ -21,7 +21,7 @@ impl Exercise {
             use std::time::Instant;
             let now = Instant::now();
             println!(
-                "--|{:4}|--{:-<64}-------------------------------------------",
+                "\n--|{:4}|--{:-<64}-------------------------------------------",
                 self.id, self.name
             );
             println!("      start {:?}\n", now);
@@ -32,7 +32,7 @@ impl Exercise {
                 self.id, self.name
             );
         } else {
-            println!("(skipped) [{:4}] {}", self.id, self.name);
+            // print!("[{}] {};", self.id, self.name);
         }
     }
 }
