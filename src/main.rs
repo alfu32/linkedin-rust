@@ -727,7 +727,7 @@ fn main() {
         },
     }
     .run(false);
-    #[rustfmt::skip]Exercise { id: 31, name: "7.3 References :: Dangling references", runnable: || {
+    Exercise { id: 31, name: "7.3 References :: Dangling references", runnable: || {
         let rocket_fuel = produce_fuel();
         println!("rocket_fuel is {rocket_fuel}");
 
@@ -756,7 +756,7 @@ fn main() {
         },
     }
     .run(false);
-    #[rustfmt::skip]Exercise { id: 33, name: "7.5 References :: Slices as function parameters", runnable: || {
+    Exercise { id: 33, name: "7.5 References :: Slices as function parameters", runnable: || {
         let message = String::from("Greetings from Earth !");
         let first_word = get_first_word(&message);
         println!("first_word is {first_word}");
@@ -774,34 +774,33 @@ fn main() {
             &s
         }
     }, } .run(false);
-    #[rustfmt::skip]Challenge { id: 34, name: "7.6 References :: Challenge: Trim Spaces", runnable: || {
+
+    Challenge { id: 34, name: "7.6 References :: Challenge: Trim Spaces", runnable: || {
         fn trim_spaces(s: &str) -> &str {
             let mut bytes = s.as_bytes().iter().enumerate();
-            let rev = s.reverse().as_bytes().iter().enumerate();
-
-            let from = loop{
-                match bytes.next() {
-                    Some((i, b)) => {
-                        if b != b' '{
-                            break i;
-                        }
-                    },
-                    None => {},
+            let reversed = s.chars().rev().collect::<String>();
+            let mut rev = reversed.as_bytes().iter().enumerate();
+            let mut from:usize=0;
+            let l = s.len();
+            let mut to : usize = s.len();
+            for (i,c) in s.chars().enumerate() {
+                if c != ' ' {
+                    from = i;
+                    break;
                 }
-            };
-            let to = loop{
-                match rev.next() {
-                    Some((i, b)) => {
-                        if b != b' '{
-                            break i;
-                        }
-                    },
-                    None => {},
+            }
+            for (i,c) in s.chars().rev().collect::<String>().chars().enumerate() {
+                if c != ' ' {
+                    to = l- i;
+                    break;
                 }
-            };
-            &s[from..s.len()-to]
+            }
+            &s[from..to]
         }
-    }, } .run(false);
+        println!("{:?}",trim_spaces(" some space "));
+        println!("{:?}",trim_spaces("                                      some more space                 "));
+        println!("{:?}",trim_spaces("             😶  😀 🥶     some more space                 "));
+    }, } .run(true);
     #[rustfmt::skip]Exercise { id: 35, name: "8.1 Modules :: Rust std lib and prelude", runnable: || {}, } .run(false);
     #[rustfmt::skip]Exercise { id: 36, name: "8.2 Modules :: standard Input", runnable: || {}, } .run(false);
     #[rustfmt::skip]Exercise { id: 37, name: "8.3 Modules :: parse Strings", runnable: || {}, } .run(false);
